@@ -1,0 +1,25 @@
+ses-sample:
+  from: ${ses-sample.to} # use the identity of the recipient as the sender
+
+spring:
+  mail:
+    properties:
+      mail:
+        transport:
+          protocol: smtp # use smtp
+        smtp:
+          port: 2587 # AWS throttles on 25, use alternate port by default
+          auth: true # enable user/password authentication
+          ssl:
+            checkserveridentity: true # validate the server identity using STARTTLS
+          starttls:
+            enable: true # enable STARTTLS
+            required: true # force STARTTLS
+          connectiontimeout: 5000 # defaults to no timeout, set a somewhat sensible value here
+          timeout: 3000 # defaults to no timeout, set a somewhat sensible value here
+          writetimeout: 5000 # defaults to no timeout, set a somewhat sensible value here
+        debug: true # enables debug logging; for development use only
+logging:
+  level:
+    javax.mail: DEBUG # enables debug logging; for development use only
+    com.sun.mail: DEBUG # enables debug logging; for development use only
