@@ -8,6 +8,19 @@ In a productive scenario, you want to read the configuration from either the des
 ## Requirements
 The apps are based on Spring Boot and require a recent JDK installation (>= Java 17).
 
+## How to run
+
+```bash
+# Clone the repository
+git clone https://github.com/SAP-samples/private-link-aws-services
+
+# switch to a sample app
+cd private-link-aws-services/s3
+
+# then, refer to the README of the subdirectory how to run it.
+cat README.md
+```
+
 ## How to obtain support
 [Create an issue](https://github.com/SAP-samples/private-link-aws-services/issues) in this repository if you find a bug or have questions about the content.
  
