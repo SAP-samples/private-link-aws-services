@@ -7,7 +7,7 @@ Create a VPC Endpoint to the service `email-smtp` (using the API to send mails v
 eg. `com.amazonaws.us-east-1.email-smtp`.
 Note the hostname, it should look similar to `vpce-00000000000000000-00000000.email-smtp.us-east-1.vpce.amazonaws.com`.
 
-If using the SAP Private Link service, create a service instance using the following command:
+If using the SAP Private Link service, create a service instance using the following command - this will create the interface endpoint for you:
 ```bash 
 # adapt the region in the service name if using a different region
 cf create-service privatelink standard my-service-instance-name -c '{"serviceName": "com.amazonaws.eu-central-1.email-smtp"}'

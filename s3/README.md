@@ -16,7 +16,7 @@ If you only want to test certain parts (i.e. only the bucket access, but don't c
 
 Create a VPC Endpoint to the service `com.amazonaws.us-east-1.s3` with type `interface`.
 
-If using the SAP Private Link service, create a service instance using the following command:
+If using the SAP Private Link service, create a service instance using the following command - this will create the interface endpoint for you:
 ```bash 
 # adapt the region in the service name if using a different region
 cf create-service privatelink standard my-service-instance-name -c '{"serviceName": "com.amazonaws.eu-central-1.s3"}'
