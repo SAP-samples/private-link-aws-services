@@ -6,7 +6,15 @@ In order to run the sample application, please execute the following steps:
 Create a VPC Endpoint to the service `sqs` eg. `com.amazonaws.us-east-1.sqs`.
 Note the hostname, it should look similar to `vpce-00000000000000000-00000000.sqs.us-east-1.vpce.amazonaws.com`.
 
-## Create a SQS Queue
+If using the SAP Private Link service, create a service instance using the following command:
+```bash 
+# adapt the region in the service name if using a different region
+cf create-service privatelink standard my-service-instance-name -c '{"serviceName": "com.amazonaws.eu-central-1.sns"}'
+```
+
+To obtain the hostname, you can either create a service key or bind your app to the service instance.
+
+## Create an SQS Queue
 Create an SQS queue by following the [official documentation](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-create-queue.html).
 
 Note the Queue URL, which looks similar to `https://sqs.us-east-1.amazonaws.com/123456789012/my-queue`.
