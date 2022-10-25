@@ -7,6 +7,14 @@ Create a VPC Endpoint to the service `email-smtp` (using the API to send mails v
 eg. `com.amazonaws.us-east-1.email-smtp`.
 Note the hostname, it should look similar to `vpce-00000000000000000-00000000.email-smtp.us-east-1.vpce.amazonaws.com`.
 
+If using the SAP Private Link service, create a service instance using the following command - this will create the interface endpoint for you:
+```bash 
+# adapt the region in the service name if using a different region
+cf create-service privatelink standard my-service-instance-name -c '{"serviceName": "com.amazonaws.eu-central-1.email-smtp"}'
+```
+
+To obtain the hostname, you can either create a service key or bind your app to the service instance.
+
 ## Create an SES identity
 By default, new accounts are placed in the [SES sandbox](https://docs.aws.amazon.com/ses/latest/dg/request-production-access.html).
 To actually run this sample app, you'll have to
