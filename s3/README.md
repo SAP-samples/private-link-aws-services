@@ -19,7 +19,7 @@ Create a VPC Endpoint to the service `com.amazonaws.us-east-1.s3` with type `int
 If using the SAP Private Link service, create a service instance using the following command - this will create the interface endpoint for you:
 ```bash 
 # adapt the region in the service name if using a different region
-cf create-service privatelink standard my-service-instance-name -c '{"serviceName": "com.amazonaws.eu-central-1.s3"}'
+cf create-service privatelink beta my-service-instance-name -c '{"serviceName": "com.amazonaws.eu-central-1.s3"}'
 ```
 
 To obtain the hostname, you can either create a service key or bind your app to the service instance.
