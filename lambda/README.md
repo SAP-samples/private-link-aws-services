@@ -14,7 +14,7 @@ cf create-service privatelink beta my-service-instance-name -c '{"serviceName": 
 
 To obtain the hostname, you can either create a service key or bind your app to the service instance.
 
-## Create an Lambda function
+## Create a Lambda function
 [Create a Lambda function](https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html#getting-started-create-function) and [deploy the function](https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-zip.html#configuration-function-update) in [`example/helloWorld.zip`](example/helloWorld.zip).
 
 ## Run the application
