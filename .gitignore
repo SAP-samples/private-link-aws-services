@@ -1,32 +1,12 @@
-# Created by https://www.toptal.com/developers/gitignore/api/maven,java,intellij
-# Edit at https://www.toptal.com/developers/gitignore?templates=maven,java,intellij
-
 ### Intellij ###
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
-# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 .idea
 .iml
-
-# CMake
-cmake-build-*/
-
-# File-based project format
+out/
+.idea_modules/
 *.iws
 
-# IntelliJ
-out/
-
-# mpeltonen/sbt-idea plugin
-.idea_modules/
-
-# JIRA plugin
-atlassian-ide-plugin.xml
-
-# Crashlytics plugin (for Android Studio and IntelliJ)
-com_crashlytics_export_strings.xml
-crashlytics.properties
-crashlytics-build.properties
-fabric.properties
+### vscode ###
+.vscode
 
 ### Java ###
 # Compiled class file
@@ -63,9 +43,9 @@ pom.xml.next
 release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
-.mvn/timing.properties
-# https://maven.apache.org/wrapper/#usage-without-binary-jar
-.mvn/wrapper/maven-wrapper.jar
+.mvn/
+!.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-properties.jar
 
 # Eclipse m2e generated files
 # Eclipse Core
@@ -73,5 +53,5 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
-# End of https://www.toptal.com/developers/gitignore/api/maven,java,intellij
-
+# macOS
+.DS_Store
