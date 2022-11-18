@@ -2,7 +2,7 @@
 
 In order to run the sample application, please execute the following steps:
 
-## Create an Lambda VPC Endpoint
+## Create a Lambda VPC Endpoint
 Create a VPC Endpoint to the service `lambda` eg. `com.amazonaws.us-east-1.lambda`.
 Note the hostname, it should look similar to `vpce-00000000000000000-00000000.lambda.us-east-1.vpce.amazonaws.com`.
 
