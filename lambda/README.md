@@ -9,7 +9,7 @@ Note the hostname, it should look similar to `vpce-00000000000000000-00000000.la
 If using the SAP Private Link service, create a service instance using the following command - this will create the interface endpoint for you:
 ```bash 
 # adapt the region in the service name if using a different region
-cf create-service privatelink standard my-service-instance-name -c '{"serviceName": "com.amazonaws.us-east-1.lambda"}'
+cf create-service privatelink beta my-service-instance-name -c '{"serviceName": "com.amazonaws.us-east-1.lambda"}'
 ```
 
 To obtain the hostname, you can either create a service key or bind your app to the service instance.
