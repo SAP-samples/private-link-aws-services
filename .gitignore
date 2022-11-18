@@ -43,9 +43,7 @@ pom.xml.next
 release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
-.mvn/
-!.mvn/wrapper/maven-wrapper.jar
-!.mvn/wrapper/maven-properties.jar
+!maven-wrapper.jar
 
 # Eclipse m2e generated files
 # Eclipse Core
