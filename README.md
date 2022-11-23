@@ -1,3 +1,4 @@
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/private-link-aws-services)](https://api.reuse.software/info/github.com/SAP-samples/private-link-aws-services)
 # Sample apps to connect to AWS services over private link
 
 This repository contains sample applications that demonstrate how the AWS SDK has to be configured so that the traffic goes over Private Link.
