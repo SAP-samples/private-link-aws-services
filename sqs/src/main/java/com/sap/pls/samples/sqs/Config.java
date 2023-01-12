@@ -1,19 +1,23 @@
 package com.sap.pls.samples.sqs;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.validation.annotation.Validated;
-
 import javax.validation.constraints.NotBlank;
 
-@Configuration
-@ConfigurationProperties(prefix = "sqs")
-@Validated
 public class Config {
+
     @NotBlank
     private String endpointUrl;
+
     @NotBlank
     private String queueUrl;
+
+    @NotBlank
+    private String accessKeyId;
+
+    @NotBlank
+    private String secretAccessKey;
+
+    @NotBlank
+    private String region;
 
     public String getEndpointUrl() {
         return endpointUrl;
@@ -29,5 +33,29 @@ public class Config {
 
     public void setQueueUrl(String queueUrl) {
         this.queueUrl = queueUrl;
+    }
+
+    public String getAccessKeyId() {
+        return accessKeyId;
+    }
+
+    public void setAccessKeyId(String accessKeyId) {
+        this.accessKeyId = accessKeyId;
+    }
+
+    public String getSecretAccessKey() {
+        return secretAccessKey;
+    }
+
+    public void setSecretAccessKey(String secretAccessKey) {
+        this.secretAccessKey = secretAccessKey;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 }

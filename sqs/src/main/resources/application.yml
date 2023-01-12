@@ -1,3 +1,0 @@
-sqs:
-  endpointUrl: # e.g. https://vpce-00000000000000000-00000000.sqs.us-east-1.vpce.amazonaws.com
-  queueUrl: # e.g. https://sqs.us-east-1.amazonaws.com/123456789012/my-queue

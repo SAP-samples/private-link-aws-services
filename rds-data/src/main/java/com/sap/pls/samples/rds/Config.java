@@ -1,30 +1,26 @@
 package com.sap.pls.samples.rds;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.validation.annotation.Validated;
-
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 
-@Configuration
-@ConfigurationProperties(prefix = "rds")
-@Validated
 public class Config {
+
     @NotBlank
     private String secretArn;
+
     @NotBlank
     private String resourceArn;
+
     @NotBlank
     private String endpointUrl;
 
-    public String getEndpointUrl() {
-        return endpointUrl;
-    }
+    @NotBlank
+    private String accessKeyId;
 
-    public void setEndpointUrl(String endpointUrl) {
-        this.endpointUrl = endpointUrl;
-    }
+    @NotBlank
+    private String secretAccessKey;
+
+    @NotBlank
+    private String region;
 
     public String getSecretArn() {
         return secretArn;
@@ -40,5 +36,37 @@ public class Config {
 
     public void setResourceArn(String resourceArn) {
         this.resourceArn = resourceArn;
+    }
+
+    public String getEndpointUrl() {
+        return endpointUrl;
+    }
+
+    public void setEndpointUrl(String endpointUrl) {
+        this.endpointUrl = endpointUrl;
+    }
+
+    public String getAccessKeyId() {
+        return accessKeyId;
+    }
+
+    public void setAccessKeyId(String accessKeyId) {
+        this.accessKeyId = accessKeyId;
+    }
+
+    public String getSecretAccessKey() {
+        return secretAccessKey;
+    }
+
+    public void setSecretAccessKey(String secretAccessKey) {
+        this.secretAccessKey = secretAccessKey;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 }

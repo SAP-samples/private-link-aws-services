@@ -12,10 +12,9 @@ import software.amazon.awssdk.services.sns.model.PublishResponse;
 @RestController
 public class Controller {
 
-    private Config config;
-    private SnsClient snsClient;
-
-    private final Logger logger = LoggerFactory.getLogger(Controller.class);
+    private final Config config;
+    private final SnsClient snsClient;
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     public Controller(Config config, SnsClient snsClient) {
         this.config = config;

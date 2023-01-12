@@ -2,8 +2,6 @@ package com.sap.pls.samples.s3;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,16 +14,16 @@ import software.amazon.awssdk.services.s3control.model.ListAccessPointsResponse;
 
 @RestController
 public class Controller {
-    Logger logger = LoggerFactory.getLogger(Controller.class);
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     private final S3Client s3Client;
     private final S3ControlClient s3ControlClient;
     private final S3Client s3AccessPointClient;
     private final Config config;
 
-    @Autowired
-    public Controller(@Qualifier("s3Bucket") S3Client s3Client,
+    public Controller(S3Client s3Client,
                       S3ControlClient s3ControlClient,
-                      @Qualifier("s3AccessPoint") S3Client s3AccessPointClient,
+                      S3Client s3AccessPointClient,
                       Config config) {
         this.s3Client = s3Client;
         this.s3ControlClient = s3ControlClient;

@@ -1,4 +1,0 @@
-rds:
-  endpointUrl: # e.g. https://vpce-00000000000000000-00000000.rds-data.us-east-1.vpce.amazonaws.com
-  secretArn: # e.g. arn:aws:secretsmanager:us-east-1:123456789012:secret:path/to/my-aurora-secret
-  resourceArn: # e.g. arn:aws:rds:us-east-1:123456789012:cluster:my-aurora

@@ -1,28 +1,25 @@
 # AWS S3 PrivateLink Sample App
 
-Private links to S3 offer many different interaction scenarios:
+The Private Link service supports several scenarios for S3:
 - Bucket & object access (via `bucket.<endpoint>` hostname)
 - Bucket & object access using an access point (via `accesspoint.<endpoint>` hostname)
 - Control access (via `control.<endpoint>` hostname)
 
 See also <https://docs.aws.amazon.com/AmazonS3/latest/userguide/privatelink-interface-endpoints.html#privatelink-aws-sdk-examples>.
 
-This sample application demonstrates all those different interactions.
-In order to run the sample application with all of the above parts, please execute all of the following steps.
+This sample application demonstrates these scenarios.
+In order to run the sample application with all of the above parts, please execute following steps.
 
 If you only want to test certain parts (i.e. only the bucket access, but don't care about the access point interaction), you can skip the necessary steps.
 
-## Create an S3 VPC Endpoint
+## Create a Private Link service instance
 
-Create a VPC Endpoint to the service `com.amazonaws.us-east-1.s3` with type `interface`.
+Create a Private Link service instance by running the following command:
 
-If using the SAP Private Link service, create a service instance using the following command - this will create the interface endpoint for you:
 ```bash 
 # adapt the region in the service name if using a different region
-cf create-service privatelink beta my-service-instance-name -c '{"serviceName": "com.amazonaws.eu-central-1.s3"}'
+cf create-service privatelink beta my-privatelink -c '{"serviceName": "com.amazonaws.eu-central-1.s3"}'
 ```
-
-To obtain the hostname, you can either create a service key or bind your app to the service instance.
 
 ## Create an S3 Bucket
 
@@ -31,25 +28,32 @@ To obtain the hostname, you can either create a service key or bind your app to 
 - Upload an empty `index.html` file to the bucket.
 - Create an access point from `Amazon S3 -> Access Points` section (not needed if you don't want to test the access point access)
 
-## Run the application
+## Create a user-provided service
 
-The application requires some environment variables from the previous steps. 
-Make sure that the application can access TCP port 443 on your VPC Endpoint.
+Create a user-provided service to provide your AWS credentials as well as your S3 configuration:
 
-- `S3_ENDPOINT_HOSTNAME` should look similar to `vpce-00000000000000000-00000000.s3.us-east-1.vpce.amazonaws.com`
-- `S3_ACCESS_POINT_ARN` should look similar to `arn:aws:s3:us-east-1:123456789012:accesspoint:my-accesspoint-name`
+```bash 
+# adapt the properties according to your setup
+cf cups my-service-config -p '{"accountId": "<accountId>", "accessPointArn": "<accessPointArn>", accessKeyId": "<accessKeyId>", "secretAccessKey":"<secretAccessKey>", "region": "<awsRegion>"}'
+```
 
-````bash
-S3_ACCOUNT_ID="<aws account id>" \
-S3_ENDPOINT_HOSTNAME="<vpc endpoint DNS name>" \
-S3_ACCESS_POINT_ARN="<Access Point ARN or dummy if you don't need it>" \
-AWS_ACCESS_KEY_ID="<username>" \
-AWS_SECRET_ACCESS_KEY="<password>" \
-./mvnw spring-boot:run
-````
+## Build and push the application
+
+Build the application and push it to CloudFoundry:
+
+```bash
+./mvnw package
+cf push
+```
+
+The `cf push` command will automatically bind the Private Link service instance and the user-provided service to the pushed application
+as defined in the [manifest file](manifest.yml).
+
+**Note: Be aware that the pushed application is publicly accessible via the provided route and should therefore be removed after testing.**
 
 ## Query the endpoint to interact with the S3 endpoint
 
+Retrieve the automatically registered route of your application from the output of running `cf apps`.
 Use curl to send requests to interact with the service. The output of the application will show some logs.
 
 - `/bucket/` uses the endpoint URL for `S3 bucket API` `https://bucket.<custom_endpoint>`
@@ -59,9 +63,12 @@ Use curl to send requests to interact with the service. The output of the applic
 ```bash
 BUCKET_NAME="<Bucket name from step `Create an S3 Bucket`>"
 FILE_NAME="index.html" # an available object in the selected S3 bucket.
-curl "127.0.0.1:8080/buckets" # Listing all available buckets
-curl "127.0.0.1:8080/bucket/${BUCKET_NAME}" # Send a request to list objects of a specific bucket
-curl "127.0.0.1:8080/bucket/${BUCKET_NAME}/${FILE_NAME}" # Send a request to get an object from the defined bucket
-curl "127.0.0.1:8080/accesspoint/${FILE_NAME}" # Send a request to get an object from the access point
-curl "127.0.0.1:8080/control/list-ap/${BUCKET_NAME}" # Send a request to list access points from the defined bucket
+curl "https://<route>/buckets" # Listing all available buckets
+curl "https://<route>/bucket/${BUCKET_NAME}" # Send a request to list objects of a specific bucket
+curl "https://<route>/bucket/${BUCKET_NAME}/${FILE_NAME}" # Send a request to get an object from the defined bucket
+curl "https://<route>/accesspoint/${FILE_NAME}" # Send a request to get an object from the access point
+curl "https://<route>/control/list-ap/${BUCKET_NAME}" # Send a request to list access points from the defined bucket
+
+# View the Cloud Foundry application logs
+cf logs s3-pls-demo --recent
 ```

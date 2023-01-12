@@ -1,0 +1,3 @@
+io.pivotal.cfenv.spring.boot.CfEnvProcessor=\
+com.sap.pls.samples.ses.PrivateLinkCfEnvProcessor,\
+com.sap.pls.samples.ses.UserProvidedServiceCfEnvProcessor

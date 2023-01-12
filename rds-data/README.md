@@ -2,38 +2,54 @@
 
 In order to run the sample application, please execute the following steps:
 
-## Create an RDS Data API VPC Endpoint
-Create a VPC Endpoint to the service `rds-data` eg. `com.amazonaws.us-east-1.rds-data`.
-Note the hostname, it should look similar to `vpce-00000000000000000-00000000.rds-data.us-east-1.vpce.amazonaws.com`.
+## Create a Private Link service instance
 
-If using the SAP Private Link service, create a service instance using the following command - this will create the interface endpoint for you:
+Create a Private Link service instance by running the following command:
+
 ```bash 
 # adapt the region in the service name if using a different region
-cf create-service privatelink beta my-service-instance-name -c '{"serviceName": "com.amazonaws.eu-central-1.rds-data"}'
+cf create-service privatelink beta my-privatelink -c '{"serviceName": "com.amazonaws.eu-central-1.rds-data"}'
 ```
 
-To obtain the hostname, you can either create a service key or bind your app to the service instance.
-
 ## Create Aurora Serverless v1, enable the data API and create secrets
-Create an Aurora Serverless v1 MySQL cluster and follow the [official documentation](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html#data-api.access) to prepare 
+
+Create an Aurora Serverless v1 MySQL cluster and follow the [official documentation](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html#data-api.access)
 to prepare the data API.
 
 When finished, note down the cluster resource arn (e.g. `arn:aws:rds:us-east-1:123456789012:cluster:my-aurora`) 
 and the ARN of the secret created (e.g. `arn:aws:secretsmanager:us-east-1:123456789012:secret:path/to/my-aurora-secret`)
 
-## Run the application
+## Create a user-provided service
 
-```bash
-RDS_ENDPOINT_URL="<url>" \
-RDS_SECRET_ARN="<secret-manager-secret-arn>" \
-RDS_RESOURCE_ARN="<rds-resource-arn>" \
-AWS_ACCESS_KEY_ID="<access_key_id>" \
-AWS_SECRET_ACCESS_KEY="<secret_access_key>" \
-./mvnw spring-boot:run
+Create a user-provided service to provide your AWS credentials as well as your RDS configuration:
+
+```bash 
+# adapt the properties according to your setup
+cf cups my-service-config -p '{"rdsArn": "<rdsArn>", "secretArn": "<secretArn>", "accessKeyId": "<accessKeyId>", "secretAccessKey":"<secretAccessKey>", "region": "<awsRegion>"}'
 ```
 
-## Query the endpoint to create a database
-Use curl to create a database, the output of the application will show some logs
+## Build and push the application
+
+Build the application and push it to CloudFoundry:
+
 ```bash
-curl -X POST '127.0.0.1:8080/database'
+./mvnw package
+cf push
+```
+
+The `cf push` command will automatically bind the Private Link service instance and the user-provided service to the pushed application
+as defined in the [manifest file](manifest.yml).
+
+**Note: Be aware that the pushed application is publicly accessible via the provided route and should therefore be removed after testing.**
+
+## Query the endpoint to create a database
+
+Retrieve the automatically registered route of your application from the output of running `cf apps`.
+Use curl to create a database, the output of the application will show some logs.
+
+```bash
+curl -X POST 'https://<route>/database'
+
+# View the Cloud Foundry application logs
+cf logs rds-data-pls-demo --recent
 ```

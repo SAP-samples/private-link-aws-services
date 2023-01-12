@@ -1,0 +1,11 @@
+applications:
+  - name: rds-data-pls-demo
+    instances: 1
+    buildpacks:
+      - java_buildpack
+    path: target/rds-data-0.0.1-SNAPSHOT.jar
+    services:
+      - my-privatelink
+      - my-service-config
+    env:
+      JBP_CONFIG_OPEN_JDK_JRE: '{ "jre": { version: 17.+ } }'

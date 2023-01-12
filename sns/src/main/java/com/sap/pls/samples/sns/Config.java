@@ -1,19 +1,23 @@
 package com.sap.pls.samples.sns;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.validation.annotation.Validated;
-
 import javax.validation.constraints.NotBlank;
 
-@Configuration
-@ConfigurationProperties(prefix = "sns")
-@Validated
 public class Config {
+
     @NotBlank
     private String topicArn;
+
     @NotBlank
     private String endpointUrl;
+
+    @NotBlank
+    private String accessKeyId;
+
+    @NotBlank
+    private String secretAccessKey;
+
+    @NotBlank
+    private String region;
 
     public String getTopicArn() {
         return topicArn;
@@ -29,5 +33,29 @@ public class Config {
 
     public void setEndpointUrl(String endpointUrl) {
         this.endpointUrl = endpointUrl;
+    }
+
+    public String getAccessKeyId() {
+        return accessKeyId;
+    }
+
+    public void setAccessKeyId(String accessKeyId) {
+        this.accessKeyId = accessKeyId;
+    }
+
+    public String getSecretAccessKey() {
+        return secretAccessKey;
+    }
+
+    public void setSecretAccessKey(String secretAccessKey) {
+        this.secretAccessKey = secretAccessKey;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 }
