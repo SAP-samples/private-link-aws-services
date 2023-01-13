@@ -1,10 +1,10 @@
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/private-link-aws-services)](https://api.reuse.software/info/github.com/SAP-samples/private-link-aws-services)
-# Sample apps to connect to AWS services over private link
+# Sample apps to connect to AWS services using SAP Private Link service
 
 This repository contains sample applications that demonstrate how the AWS SDK has to be configured so that the traffic goes over Private Link.
 
-Be aware that the sample apps read the necessary configuration (endpoint hostnames, credentials and further values) from environment variables.
-In a productive scenario, you want to read the configuration from either the destination service, the SAP Private link service instance bindings or user-provided-services (for the AWS credentials).
+The sample applications are specifically developed for the use of the SAP Private Link service provided on CloudFoundry. Each sample application directory
+contains a dedicated README with instructions on how to run the application.
 
 ## Requirements
 The apps are based on Spring Boot and require a recent JDK installation (>= Java 17).
@@ -15,7 +15,7 @@ The apps are based on Spring Boot and require a recent JDK installation (>= Java
 # Clone the repository
 git clone https://github.com/SAP-samples/private-link-aws-services
 
-# switch to a sample app
+# switch to a sample app, e.g. s3
 cd private-link-aws-services/s3
 
 # then, refer to the README of the subdirectory how to run it.

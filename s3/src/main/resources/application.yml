@@ -1,4 +1,0 @@
-s3:
-  accountId: "" # e.g 123456789012
-  endpointHostname: "" # e.g. vpce-00000000000000000-00000000.s3.us-east-1.vpce.amazonaws.com
-  accessPointBucketARN: "" # e.g arn:aws:s3:us-east-1:123456789012:accesspoint:my-accesspoint-name

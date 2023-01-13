@@ -1,3 +1,0 @@
-lambda:
-  endpointUrl: # e.g. https://vpce-00000000000000000-00000000.lambda.us-east-1.vpce.amazonaws.com
-  functionName: # e.g. helloWorld

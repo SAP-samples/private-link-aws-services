@@ -1,22 +1,26 @@
 package com.sap.pls.samples.s3;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.validation.annotation.Validated;
-
 import javax.validation.constraints.NotBlank;
 
-@Configuration
-@ConfigurationProperties(prefix = "s3")
-@Validated
 public class Config {
-    
+
     @NotBlank
     private String endpointHostname;
+
     @NotBlank
     private String accountId;
+
     @NotBlank
     private String accessPointArn;
+
+    @NotBlank
+    private String accessKeyId;
+
+    @NotBlank
+    private String secretAccessKey;
+
+    @NotBlank
+    private String region;
 
     public String getEndpointHostname() {
         return endpointHostname;
@@ -40,5 +44,29 @@ public class Config {
 
     public void setAccessPointArn(String accessPointArn) {
         this.accessPointArn = accessPointArn;
+    }
+
+    public String getAccessKeyId() {
+        return accessKeyId;
+    }
+
+    public void setAccessKeyId(String accessKeyId) {
+        this.accessKeyId = accessKeyId;
+    }
+
+    public String getSecretAccessKey() {
+        return secretAccessKey;
+    }
+
+    public void setSecretAccessKey(String secretAccessKey) {
+        this.secretAccessKey = secretAccessKey;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 }

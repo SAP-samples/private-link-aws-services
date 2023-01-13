@@ -18,9 +18,7 @@ public class Controller {
     private final JavaMailSender emailSender;
     private final String from;
     private final String to;
-
-    private final Logger logger = LoggerFactory.getLogger(Controller.class);
-
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     public Controller(
             JavaMailSender emailSender,

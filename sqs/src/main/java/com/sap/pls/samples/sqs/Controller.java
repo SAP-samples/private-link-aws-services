@@ -13,10 +13,9 @@ import java.util.stream.Collectors;
 @RestController
 public class Controller {
 
-    private Config config;
-    private SqsClient sqsClient;
-
-    private final Logger logger = LoggerFactory.getLogger(Controller.class);
+    private final Config config;
+    private final SqsClient sqsClient;
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     public Controller(Config config, SqsClient sqsClient) {
         this.config = config;

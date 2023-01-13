@@ -1,6 +1,5 @@
 package com.sap.pls.samples.rds;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import software.amazon.awssdk.services.rdsdata.RdsDataClient;
@@ -9,10 +8,10 @@ import software.amazon.awssdk.services.rdsdata.model.ExecuteStatementResponse;
 
 @RestController
 public class Controller {
+
     private final Config config;
     private final RdsDataClient rdsDataClient;
 
-    @Autowired
     public Controller(Config config, RdsDataClient rdsDataClient) {
         this.config = config;
         this.rdsDataClient = rdsDataClient;

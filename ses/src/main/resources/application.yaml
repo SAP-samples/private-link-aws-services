@@ -1,6 +1,3 @@
-ses-sample:
-  from: ${ses-sample.to} # use the identity of the recipient as the sender
-
 spring:
   mail:
     properties:

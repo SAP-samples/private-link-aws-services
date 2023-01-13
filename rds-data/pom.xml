@@ -43,6 +43,12 @@
 			<artifactId>rdsdata</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>io.pivotal.cfenv</groupId>
+			<artifactId>java-cfenv-boot</artifactId>
+			<version>2.4.1</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
