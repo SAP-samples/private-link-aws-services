@@ -32,7 +32,7 @@ Create a user-provided service to provide your SES configuration:
 
 ```bash 
 # adapt the properties according to your setup
-cf cups my-service-config -p '{"username": "<username>", "password": "<password>", "from":"<sender mail address>", "to": "<receiver mail address>"}'
+cf cups my-service-config -p '{"username": "<username>", "password": "<password>", "from": "<sender mail address>", "to": "<receiver mail address>"}'
 ```
 
 ## Build and push the application

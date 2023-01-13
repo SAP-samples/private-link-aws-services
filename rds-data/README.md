@@ -25,7 +25,7 @@ Create a user-provided service to provide your AWS credentials as well as your R
 
 ```bash 
 # adapt the properties according to your setup
-cf cups my-service-config -p '{"rdsArn": "<rdsArn>", "secretArn": "<secretArn>", "accessKeyId": "<accessKeyId>", "secretAccessKey":"<secretAccessKey>", "region": "<awsRegion>"}'
+cf cups my-service-config -p '{"rdsArn": "<rdsArn>", "secretArn": "<secretArn>", "accessKeyId": "<accessKeyId>", "secretAccessKey": "<secretAccessKey>", "region": "<awsRegion>"}'
 ```
 
 ## Build and push the application
