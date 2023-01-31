@@ -1,7 +1,7 @@
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/private-link-aws-services)](https://api.reuse.software/info/github.com/SAP-samples/private-link-aws-services)
 # Sample apps to connect to AWS services using SAP Private Link service
 
-This repository contains sample applications for a selected list of services, that demonstrate how the AWS SDK has to be configured so that the traffic goes over Private Link.
+This repository contains sample applications for a selected list of AWS services, demonstrating how the AWS SDK must be configured so that the traffic goes over SAP Private Link service.
 
 The sample applications are specifically developed for the use of the SAP Private Link service provided on CloudFoundry. Each sample application directory
 contains a dedicated README with instructions on how to run the application.
