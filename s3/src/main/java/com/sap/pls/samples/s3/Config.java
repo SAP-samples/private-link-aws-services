@@ -10,7 +10,6 @@ public class Config {
     @NotBlank
     private String accountId;
 
-    @NotBlank
     private String accessPointArn;
 
     @NotBlank
