@@ -3,6 +3,7 @@ package com.sap.pls.samples.s3;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -59,8 +60,8 @@ public class Controller {
                 .build();
         try {
             ListObjectsResponse response = s3Client.listObjects(request);
-            logger.info("Listing objects of the bucket: '{}' with id '{}'. Status: {}",
-                    bucketName, response.responseMetadata().requestId(), response.sdkHttpResponse().statusCode());
+            logger.info("Listing objects of the bucket: '{}' with id '{}'. Status: {} Data: {}",
+                    bucketName, response.responseMetadata().requestId(), response.sdkHttpResponse().statusCode(), response.contents());
             return ResponseEntity
                     .status(response.sdkHttpResponse().statusCode())
                     .body(response.sdkHttpResponse());
@@ -103,8 +104,8 @@ public class Controller {
                 .build();
         try {
             ListAccessPointsResponse response = s3ControlClient.listAccessPoints(request);
-            logger.info("Listing access points of the bucket: '{}' with id '{}'. Status: {}",
-                    bucketName, response.responseMetadata().requestId(), response.sdkHttpResponse().statusCode());
+            logger.info("Listing access points of the bucket: '{}' with id '{}'. Status: {} Data: {}",
+                    bucketName, response.responseMetadata().requestId(), response.sdkHttpResponse().statusCode(), response.accessPointList());
             return ResponseEntity
                     .status(response.sdkHttpResponse().statusCode())
                     .body(response.sdkHttpResponse());
@@ -119,6 +120,10 @@ public class Controller {
 
     @GetMapping(value = "/accesspoint/{fileName}", produces = "application/json; charset=UTF-8")
     public ResponseEntity getObjectAccessPoint(@PathVariable("fileName") String fileName) {
+        if (!StringUtils.hasText(this.config.getAccessPointArn())) {
+            throw new UnsupportedOperationException("No access point ARN provided in the configuration");
+        }
+
         GetObjectRequest request = GetObjectRequest.builder()
                 .bucket(config.getAccessPointArn())
                 .key(fileName)

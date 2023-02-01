@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
@@ -81,9 +82,13 @@ public class Application {
     @Valid
     Config config(CfEnv cfEnv) {
         CfCredentials s3ServiceCredentials = cfEnv.findCredentialsByLabel(USER_PROVIDED_LABEL);
+        String host = cfEnv.findCredentialsByLabel(PRIVATELINK_LABEL).getHost();
+        if (StringUtils.hasText(host)) {
+            host = host.replaceFirst("^\\*.", "");
+        }
 
         Config config = new Config();
-        config.setEndpointHostname(cfEnv.findCredentialsByLabel(PRIVATELINK_LABEL).getHost());
+        config.setEndpointHostname(host);
         config.setAccessKeyId(s3ServiceCredentials.getString("accessKeyId"));
         config.setSecretAccessKey(s3ServiceCredentials.getString("secretAccessKey"));
         config.setRegion(s3ServiceCredentials.getString("region"));
