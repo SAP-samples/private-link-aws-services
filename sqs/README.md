@@ -8,7 +8,7 @@ Create a Private Link service instance by running the following command:
 
 ```bash 
 # adapt the region in the service name if using a different region
-cf create-service privatelink beta my-privatelink -c '{"serviceName": "com.amazonaws.eu-central-1.sqs"}'
+cf create-service privatelink standard my-privatelink -c '{"serviceName": "com.amazonaws.eu-central-1.sqs"}'
 ```
 
 To obtain the hostname, you can either create a service key or bind your app to the service instance.

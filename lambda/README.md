@@ -8,7 +8,7 @@ Create a Private Link service instance by running the following command:
 
 ```bash 
 # adapt the region in the service name if using a different region
-cf create-service privatelink beta my-privatelink -c '{"serviceName": "com.amazonaws.us-east-1.lambda"}'
+cf create-service privatelink standard my-privatelink -c '{"serviceName": "com.amazonaws.us-east-1.lambda"}'
 ```
 
 ## Create a Lambda function
