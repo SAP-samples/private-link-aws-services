@@ -2,6 +2,8 @@ package com.sap.pls.samples.rds;
 
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.beans.factory.annotation.Value;
+
 public class Config {
 
     @NotBlank
@@ -21,6 +23,9 @@ public class Config {
 
     @NotBlank
     private String region;
+
+    @Value("${TRUST_ALL_CERTIFICATES:false}")
+    private boolean trustAllCertificates;
 
     public String getSecretArn() {
         return secretArn;
@@ -68,5 +73,9 @@ public class Config {
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public boolean getTrustAllCertificates() {
+        return this.trustAllCertificates;
     }
 }
