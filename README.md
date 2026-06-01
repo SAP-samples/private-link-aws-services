@@ -8,6 +8,7 @@ contains a dedicated README with instructions on how to run the application.
 
 For a full list of currently supported AWS services, please visit our [official documentation](https://help.sap.com/docs/PRIVATE_LINK/42acd88cb4134ba2a7d3e0e62c9fe6cf/575341947b854a82a9f3ba2bc6b1b6cc.html?locale=en-US#supported-services).
 
+
 ## Requirements
 The apps are based on Spring Boot and require a recent JDK installation (>= Java 17).
 
