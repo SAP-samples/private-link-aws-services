@@ -19,12 +19,29 @@ public class Controller {
 
     @PostMapping("/database")
     public String createDatabase() {
-        String insertSQL = "CREATE DATABASE IF NOT EXISTS test";
+        String insertSQL = "CREATE DATABASE test";
+        String checkDbSQL = "SELECT EXISTS(SELECT datname FROM pg_catalog.pg_database WHERE datname = 'test')";
 
-        ExecuteStatementRequest sqlRequest = createExecuteStatementRequest(insertSQL);
+        ExecuteStatementRequest sqlRequest = createExecuteStatementRequest(checkDbSQL);
         ExecuteStatementResponse executeStatementResponse = rdsDataClient.executeStatement(sqlRequest);
+        final int httpStatus = executeStatementResponse.sdkHttpResponse().statusCode();
+        if (httpStatus >= 200 && httpStatus < 300) {
 
-        return "Created Database 'test' with status code:" + executeStatementResponse.sdkHttpResponse().statusCode();
+            if (executeStatementResponse.hasRecords()) {
+                final boolean dbExists = executeStatementResponse.records().get(0).get(0).booleanValue();
+                if (dbExists) {
+                    return "Database 'test' already exists";
+                }
+            }
+
+            sqlRequest = createExecuteStatementRequest(insertSQL);
+            executeStatementResponse = rdsDataClient.executeStatement(sqlRequest);
+
+            return "Created Database 'test' with status code:"
+                    + executeStatementResponse.sdkHttpResponse().statusCode();
+
+        }
+        return "Error: executing SQL that checks if DB exists, status code:" + httpStatus;
     }
 
     private ExecuteStatementRequest createExecuteStatementRequest(String sql) {
@@ -36,5 +53,3 @@ public class Controller {
         return request;
     }
 }
-
-

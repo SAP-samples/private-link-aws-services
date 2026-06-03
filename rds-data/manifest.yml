@@ -9,3 +9,4 @@ applications:
       - my-service-config
     env:
       JBP_CONFIG_OPEN_JDK_JRE: '{ "jre": { version: 17.+ } }'
+      TRUST_ALL_CERTIFICATES: false

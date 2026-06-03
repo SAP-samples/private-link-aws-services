@@ -6,24 +6,24 @@ In order to run the sample application, please execute the following steps:
 
 Create a Private Link service instance by running the following command:
 
-```bash 
+```bash
 # adapt the region in the service name if using a different region
 cf create-service privatelink standard my-privatelink -c '{"serviceName": "com.amazonaws.eu-central-1.rds-data"}'
 ```
 
 ## Create Aurora Serverless v1, enable the data API and create secrets
 
-Create an Aurora Serverless v1 MySQL cluster and follow the [official documentation](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html#data-api.access)
+Create an Aurora Serverless v2 PostgreSQL cluster and follow the [official documentation](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html#data-api.access)
 to prepare the data API.
 
-When finished, note down the cluster resource arn (e.g. `arn:aws:rds:us-east-1:123456789012:cluster:my-aurora`) 
+When finished, note down the cluster resource arn (e.g. `arn:aws:rds:us-east-1:123456789012:cluster:my-aurora`)
 and the ARN of the secret created (e.g. `arn:aws:secretsmanager:us-east-1:123456789012:secret:path/to/my-aurora-secret`)
 
 ## Create a user-provided service
 
 Create a user-provided service to provide your AWS credentials as well as your RDS configuration:
 
-```bash 
+```bash
 # adapt the properties according to your setup
 cf cups my-service-config -p '{"rdsArn": "<rdsArn>", "secretArn": "<secretArn>", "accessKeyId": "<accessKeyId>", "secretAccessKey": "<secretAccessKey>", "region": "<awsRegion>"}'
 ```
